@@ -1,0 +1,64 @@
+﻿@model EntryIndexViewModel
+
+@{
+    ViewData["Title"] = "Player List Page";
+}
+
+ 
+
+<div class="section-filters">
+    <h3>Stats Overview - Game#@Model.Entry.Id</h3>
+</div>
+<div class="game-overview">
+    <div>
+        
+    </div>
+    <span class="game-overview-player">
+        <img class="stock-icon" src="@Model.Entry.Character1?.GetStockIconPath()" />
+    </span>
+    <span class="game-overview-player">
+        <img class="stock-icon" src="@Model.Entry.Character2?.GetStockIconPath()" />
+    </span>
+    <div>
+        <div>
+            <label class="stage-name">@Model.Entry.Stage.GetDisplayName()</label>
+        </div>
+        <div>
+            <label>Slp Version: @Model.Entry.Platform</label>
+        </div>
+        <div>
+            <img class="stage-image" src="@Model.Entry.Stage.GetStageImagePath()" />
+        </div>
+        <div class="stock-icon-multiple-all">
+            <span class="stock-icon-multiple">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <img class="stock-icon@(0 <= i ? "-faded" : "")" src="@Model.Entry.Character1?.GetStockIconPath()" />
+                }
+            </span>
+            <span class="stock-icon-multiple">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <img class="stock-icon@(0 <= i ? "-faded" : "")" src="@Model.Entry.Character2?.GetStockIconPath()" />
+                }
+            </span>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+<script>
+    function downloadReplay(gameId) {
+        window.location.href = '/Game/DownloadReplay?gameId=' + @Model.Entry.Id;
+    }
+
+    window.setTimeout(function () {
+        window.location.reload(true);
+    //}, 50000);
+    }, 50000000);
+</script>
+}

@@ -1,0 +1,104 @@
+﻿@model  EntryListViewModel
+
+@{
+    ViewData["Title"] = "Games List";
+}
+
+<div class="section-filters">
+    <h3>Stats Overview - @Model.Entries.Count games found</h3>
+    <form class="form-standard" method="post">
+        <div class="form-standard-field">
+            <input name="PlayerFilter1" placeholder="Player Tag or Code" type="text" value="@Model.PlayerFilter1" />
+        </div>
+        <div class="form-standard-field">
+            <input name="PlayerFilter2" placeholder="Player Tag or Code" type="text" value="@Model.PlayerFilter2" />
+        </div>
+        <div class="form-standard-field">
+            <select name="CharacterFilter1">
+                <option value="" selected="selected">Character</option>
+                @foreach (Character character in Model.Characters)
+                {
+                    if (character == Model.CharacterFilter1)
+                    {
+                        <option value="@character" selected="selected">@character.GetDisplayName()</option>
+                    }
+                    else
+                    {
+                        <option value="@character">@character.GetDisplayName()</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-standard-field">
+            <select name="CharacterFilter2">
+                <option value="" selected="selected">Character</option>
+                @foreach (Character character in Model.Characters)
+                {
+                    if (character == Model.CharacterFilter2)
+                    {
+                        <option value="@character" selected="selected">@character.GetDisplayName()</option>
+                    }
+                    else
+                    {
+                        <option value="@character">@character.GetDisplayName()</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-standard-field">
+            <select name="StageFilter">
+                <option selected="selected">Stage</option>
+                @foreach (Stage stage in Model.Stages)
+                {
+                    if (stage == Model.StageFilter)
+                    {
+                        <option value="@stage" selected="selected">@stage.GetDisplayName()</option>
+                    }
+                    else
+                    {
+                        <option value="@stage">@stage.GetDisplayName()</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-standard-field">
+            <button class="button" type="submit">Filter</button>
+        </div>
+    </form>
+</div>
+
+<table class="table-game-entry table-primary">
+    <thead>
+        <tr>
+            <th class="align-center">Game Id</th>
+            <th class="align-left"></th>
+            <th class="align-left"></th>
+            <th class="align-center">Player 1</th>
+            <th class="align-left"></th>
+            <th class="align-left"></th>
+            <th class="align-center">Player 2</th>
+            <th class="align-left"></th>
+            <th class="align-center">Stage</th>
+            <th class="align-center">Date</th>
+            <th class="align-left" hidden></th>
+            <th class="align-left" hidden>File Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Entry entry in Model.Entries.Take(50))
+        {
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function goToProfile(id) {
+            window.location.href = '/Player/Profile/' + id;
+        }
+
+        function goToGame(id) {
+            window.location.href = '/Game/' + id
+        }
+    </script>
+}

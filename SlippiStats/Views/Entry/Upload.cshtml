@@ -1,0 +1,95 @@
+@{
+    ViewData["Title"] = "Upload Page";
+}
+
+<div class="section-heading">
+    <h2>Upload a Game</h2>
+</div>
+<div class="upload-section">
+    <input id="replayInput" type="file" />
+</div>
+<div class="section-heading">
+    <h2>Upload a Tournament</h2>
+</div>
+<div class="upload-section">
+    <div>
+        <button class="button" onclick="uploadTournament()">
+            Upload a Tournament
+        </button>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        function uploadTournament() {
+            window.location.href = '/Tournament/Upload';
+        }
+    </script>
+
+    <script type="module">
+
+        import { Game } from 'https://cdn.skypack.dev/@@slippilab/parser?min';
+
+        const input = document.querySelector('#replayInput');
+
+        input.onchange = async () => {
+
+            const game = new Game(await input.files[0].arrayBuffer());
+            const startBlock = game.gameStart;
+
+            console.log(game);
+            console.log(game.gameStart.playerSettings[0]['cpuLevel']);
+
+            //const playerIndexes = startBlock
+            //const characterIds = startBlock.playerSettings.map((e) => e.externalCharacterId);
+
+            const players = startBlock.playerSettings.filter((p) => p.playerType != 3).map((p) => {
+                return {
+                    playerIndex: p.playerIndex,
+                    characterId: p.externalCharacterId,
+                    playerType: p.playerType,
+                    startingStockCount: p.startStocks,
+                    costumeIndex: p.costumeIndex,
+                    teamShade: p.teamShade,
+                    handicap: p.handicap,
+                    teamId: p.teamId,
+                    playerBitfield: p.playerBitfield,
+                    cpuLevel: p.cpuLevel,
+                    offenseRatio: p.offenseRatio,
+                    defenseRatio: p.defenseRatio,
+                    modelScale: p.modelScale,
+                    dashbackFix: p.controllerFix,
+                    shieldDropFix: p.controllerFix,
+                    nametag: p.nametag,
+                    displayName: p.displayName,
+                    connectCode: p.connectCode
+                };
+            });
+
+            //console.log(players);
+
+            const url = 'https://localhost:44314/Game/Upload';
+            const request = new XMLHttpRequest();
+            request.open('POST', url);
+            let formData = new FormData();
+            formData.append("slpVersion", startBlock.replayFormatVersion);
+            formData.append("isTeams", startBlock.isTeams);
+            formData.append("stageId", startBlock.stageId);
+
+            players.forEach((p, index) => {
+                Object.keys(p).forEach((key) => {
+                    formData.append(`players[${index}].${key}`, p[key])
+                });
+            });
+
+            console.log(players);
+
+
+            request.send(formData);
+
+
+        }
+    </script>
+}

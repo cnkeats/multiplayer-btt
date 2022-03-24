@@ -1,0 +1,49 @@
+﻿@model  PlayerListViewModel
+
+@{
+    ViewData["Title"] = "Player List Page";
+}
+
+<div class="section-filters">
+    <h3>Stats Overview - @Model.PlayerListEntries.Count players found</h3>
+    <form class="form-standard" method="post">
+        <div class="form-standard-field">
+            <input name="PlayerFilter" placeholder="Player Tag or Code" type="text" value="@Model.PlayerFilter" />
+        </div>
+        <div class="form-standard-field">
+            <button class="button" type="submit">Filter</button>
+        </div>
+    </form>
+</div>
+
+<table class="table-primary">
+    <thead>
+        <tr>
+            <th class="align-left" hidden>Id</th>
+            <th class="align-right">Name</th>
+            <th class="align-left">Connect Code</th>
+            <th class="align-center">Games Played</th>
+            <th class="align-center">Win Rate</th>
+            <th class="align-left">Mains</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PlayerListEntry entry in Model.PlayerListEntries.Take(100))
+        {
+            Player player = entry.Player;
+            <tr onclick="location.href = '@(Url.Action("Profile", "Player", new { id = player.Id }))'">
+                <td class="align-left" hidden>@player.Id</td>
+                <td class="align-right">@player.Name</td>
+                <td class="align-left">@player.ConnectCode</td>
+                <td class="align-center">@entry.GamesPlayed</td>
+                <td class="align-center">@(entry.GamesWon == 0 ? "0" : (entry.GamesWon * 100f / entry.GamesPlayed).ToString("#"))%</td>
+                <td class="align-left">
+                    @foreach (Character character in entry.Mains)
+                    {
+                        <img class="stock-icon" src="@character.GetStockIconPath()" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
