@@ -32,7 +32,6 @@ namespace SlippiStats.Controllers
 
                 if (count < 100)
                 {
-                    entry.GamesPlayed = Player.GetGamesPlayedByPlayerId(Database.Connection, player.Id);
                     entry.GamesWon = Player.GetGamesWonByPlayerId(Database.Connection, player.Id);
                     entry.Mains = Player.GetCharacterMainsByPlayerId(Database.Connection, player.Id);
                 }
@@ -58,7 +57,6 @@ namespace SlippiStats.Controllers
 
                 if (count < 100)
                 {
-                    entry.GamesPlayed = Player.GetGamesPlayedByPlayerId(Database.Connection, player.Id);
                     entry.GamesWon = Player.GetGamesWonByPlayerId(Database.Connection, player.Id);
                     entry.Mains = Player.GetCharacterMainsByPlayerId(Database.Connection, player.Id);
                 }

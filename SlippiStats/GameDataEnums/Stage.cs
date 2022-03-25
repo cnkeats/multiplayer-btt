@@ -139,6 +139,59 @@ namespace SlippiStats.GameDataEnums
         [StageIcon("/images/stage_icons/FinalDestinationIconSSBM.png")]
         [StageImage("/images/stage_images/Final Destination.png")]
         [Display(Name = "Final Destination")]
-        FINAL_DESTINATION = 32
+        FINAL_DESTINATION = 32,
+        [Display(Name = "Mario BTT")]
+        TARGET_TEST_MARIO = 33,
+        [Display(Name = "Captain Falcon BTT")]
+        TARGET_TEST_CAPTAIN_FALCON = 34,
+        [Display(Name = "Young Link BTT")]
+        TARGET_TEST_YOUNG_LINK = 35,
+        [Display(Name = "Donkey Kong BTT")]
+        TARGET_TEST_DONKEY_KONG = 36,
+        [Display(Name = "Dr. Mario BTT")]
+        TARGET_TEST_DOCTOR_MARIO = 37,
+        [Display(Name = "Falco BTT")]
+        TARGET_TEST_FALCO = 38,
+        [Display(Name = "Fox BTT")]
+        TARGET_TEST_FOX = 39,
+        [Display(Name = "Ice Climbers BTT")]
+        TARGET_TEST_ICE_CLIMBERS = 40,
+        [Display(Name = "Kirby BTT")]
+        TARGET_TEST_KIRBY = 41,
+        [Display(Name = "Bowser BTT")]
+        TARGET_TEST_BOWSER = 42,
+        [Display(Name = "Link BTT")]
+        TARGET_TEST_LINK = 43,
+        [Display(Name = "Luigi BTT")]
+        TARGET_TEST_LUIGI = 44,
+        [Display(Name = "Marth BTT")]
+        TARGET_TEST_MARTH = 45,
+        [Display(Name = "Mewtwo BTT")]
+        TARGET_TEST_MEWTWO = 46,
+        [Display(Name = "Ness BTT")]
+        TARGET_TEST_NESS = 47,
+        [Display(Name = "Peach BTT")]
+        TARGET_TEST_PEACH = 48,
+        [Display(Name = "Pichu BTT")]
+        TARGET_TEST_PICHU = 49,
+        [Display(Name = "Pikachu BTT")]
+        TARGET_TEST_PIKACHU = 50,
+        [Display(Name = "Jigglypuff BTT")]
+        TARGET_TEST_JIGGLYPUFF = 51,
+        [Display(Name = "Samus BTT")]
+        TARGET_TEST_SAMUS = 52,
+        [Display(Name = "Sheik BTT")]
+        TARGET_TEST_SHEIK = 53,
+        [Display(Name = "Yoshi BTT")]
+        TARGET_TEST_YOSHI = 54,
+        [Display(Name = "Zelda BTT")]
+        TARGET_TEST_ZELDA = 55,
+        [Display(Name = "Mr. Game & Watch BTT")]
+        TARGET_TEST_MR_GAME_AND_WATCH = 56,
+        [Display(Name = "Roy BTT")]
+        TARGET_TEST_ROY = 57,
+        [Display(Name = "Ganondorf BTT")]
+        TARGET_TEST_GANONDORF = 58,
+        
     }
 }

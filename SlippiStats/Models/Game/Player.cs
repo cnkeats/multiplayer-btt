@@ -111,8 +111,7 @@ namespace SlippiStats.Models
             List<Player> players = new List<Player>();
 
             using IDbCommand command = connection.CreateStoredProcedure(
-                $"{nameof(Player)}_{nameof(GetList)}",
-                new { includeAnonymous });
+                $"{nameof(Player)}_{nameof(GetList)}");
 
             using IDataReader reader = command.ExecuteReader();
 
@@ -140,24 +139,6 @@ namespace SlippiStats.Models
             }
 
             return players;
-        }
-
-        public static int GetGamesPlayedByPlayerId(IDbConnection connection, int playerId)
-        {
-            int gamesPlayed = 0;
-
-            using IDbCommand command = connection.CreateStoredProcedure(
-                $"{nameof(Player)}_{nameof(GetGamesPlayedByPlayerId)}",
-                new { playerId });
-
-            using IDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                gamesPlayed = reader.GetValue<int>(nameof(gamesPlayed));
-            }
-
-            return gamesPlayed;
         }
 
         public static int GetGamesWonByPlayerId(IDbConnection connection, int playerId)

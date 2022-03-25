@@ -1,0 +1,100 @@
+@model EntrySubmitViewModel
+
+@{
+    ViewData["Title"] = "Games List";
+}
+
+<div class="section-heading">
+    <h2>Submit a Run</h2>
+</div>
+<div class="upload-section">
+    <form method="post">
+        <div>
+            <select id="character1" name="character1" placeholder="Character 1" style="height: 30px">
+                @{foreach (Character character in Model.Characters)
+                    {
+                        <option value="@((int)character)">@character.GetDisplayName()</option>
+                    }
+                }
+            </select>
+            <select id="character2" name="character2" placeholder="Character 2" style="height: 30px">
+                @{foreach (Character character in Model.Characters)
+                    {
+                        <option value="@((int)character)">@character.GetDisplayName()</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <input id="player1" name="player1" placeholder="Player 1" style="width:100px" autocomplete="off" required />
+            <input id="player2" name="player2" placeholder="Player 2" style="width:100px" autocomplete="off" />
+        </div>
+        <div>
+            <label>Stage</label>
+            <select id="stage" name="stage" placeholder="Stage">
+                @foreach (Stage stage in Model.Stages.Where(s => (int)s > 32 && (int)s < 59).ToList())
+                {
+                    <option value="@((int)stage)">@stage.GetDisplayName()</option>
+                }
+            </select>
+        </div>
+        <div class="time-input-container">
+            <input class="time-input" type="number" id="minutes" name="minutes" onchange="updateTime()" min="0" value="0" required /> : <input class="time-input" type="number" id="seconds" name="seconds" onchange="updateTime()" min="0" value="59" required /> . <input class="time-input" type="number" id="centiseconds" name="centiseconds" onchange="updateTime()" min="0" value="99" required />
+            <input type="number" id="frames" name="frames" autocomplete="off" hidden />
+        </div>
+        <div>
+            <label>Remaining Targets</label>
+            <select id="targetsRemaining" name="targetsRemaining" placeholder="Targets" style="width: 60px; height: 30px">
+                @{for (int i = 0; i < 10; i++)
+                    {
+                        <option>@i</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <input id="dateRun" name="dateRun" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <select id="platform" name="platform" placeholder="Platform">
+                <option>Slippi</option>
+                <option>Dolphin</option>
+                <option>Console</option>
+            </select>
+        </div>
+        <div>
+            <input id="videoURL" name="videoURL" placeholder="Video Link" autocomplete="off" />
+        </div>
+        <button class="button" type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+
+    function updateTime() {
+
+        var minutes = $("#minutes").val();
+        var seconds = $("#seconds").val();
+        var centiseconds = $("#centiseconds").val();
+
+        if (minutes.length > 2) {
+            $("#minutes").val(minutes.substring(0, 2));
+        }
+
+        if (seconds.length > 2) {
+            $("#seconds").val(seconds.substring(0, 2));
+        }
+
+        if (centiseconds.length > 2) {
+            $("#centiseconds").val(centiseconds.substring(0, 2));
+        }
+
+        var frames = 0;
+        frames += minutes * 3600;
+        frames += seconds * 60;
+        frames += Math.ceil(centiseconds / 99 * 59);
+
+        $("#frames").val(frames);
+    }
+
+</script>

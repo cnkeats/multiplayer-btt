@@ -1,11 +1,11 @@
-﻿@model  EntryListViewModel
+﻿@model EntryListViewModel
 
 @{
-    ViewData["Title"] = "Games List";
+    ViewData["Title"] = "World Record List";
 }
 
 <div class="section-filters">
-    <h3>Stats Overview - @Model.Entries.Count games found</h3>
+    <h3>Highscores Overview - @Model.Entries.Count records found</h3>
     <form class="form-standard" method="post">
         <div class="form-standard-field">
             <input name="PlayerFilter1" placeholder="Player Tag or Code" type="text" value="@Model.PlayerFilter1" />
@@ -67,26 +67,26 @@
     </form>
 </div>
 
-<table class="table-game-entry table-primary">
+<table class="table-game-entry table-primary table-entries pad-top-lg">
     <thead>
         <tr>
-            <th class="align-center">Game Id</th>
-            <th class="align-left"></th>
-            <th class="align-left"></th>
-            <th class="align-center">Player 1</th>
-            <th class="align-left"></th>
-            <th class="align-left"></th>
-            <th class="align-center">Player 2</th>
-            <th class="align-left"></th>
+            <th class="align-center">Character 1</th>
+            <th class="align-center">Character 2</th>
             <th class="align-center">Stage</th>
+            <th class="align-center">Time</th>
             <th class="align-center">Date</th>
-            <th class="align-left" hidden></th>
-            <th class="align-left" hidden>File Name</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Entry entry in Model.Entries.Take(50))
+        @foreach (Entry entry in Model.Entries)
         {
+            <tr class="align-center">
+                <td><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
+                <td><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
+                <td>@entry.Stage.GetDisplayName()</td>
+                <td>@entry.Frames</td>
+                <td>@entry.DateRun.ToShortDateString()</td>
+            </tr>
         }
     </tbody>
 </table>

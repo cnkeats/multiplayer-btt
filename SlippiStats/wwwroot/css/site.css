@@ -656,7 +656,6 @@ div[class^="section-"] {
 .table-primary {
     border-collapse:collapse;
     font-size:14px;
-    width:100%;
     color: var(--color-on-surface);
 }
 .table-primary .align-left {
@@ -687,7 +686,7 @@ div[class^="section-"] {
 }
 .table-primary th,
 .table-primary td {
-    padding:8px 6px;
+    padding:8px 25px;
 }
 .table-primary th {
     background-color: var(--color-secondary);
@@ -886,6 +885,9 @@ div[class^="section-"] {
     outline-offset:-2px;
     cursor: auto;
 }
+.table-game-entry tbody td img {
+    vertical-align:middle;
+}
 .result-victory {
     background-color: var(--color-victory)
 }
@@ -953,5 +955,41 @@ div[class^="section-"] {
 
 .upload-section * {
     text-align: center;
-    margin: 5px;
+    margin: 10px;
+}
+
+.upload-section select {
+    background-color: white;
+    color: black;
+    height: 30px !important;
+}
+
+.table-entries {
+    max-width: 60%;
+    margin: 0px auto;
+}
+
+.time-input-container {
+    font-weight:900
+}
+
+.time-input {
+    margin: 0px;
+    width: 30px;
+    height: 25px !important;
+    background-color: white !important;
+    color: black !important;
+    padding: 0px !important;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
 }

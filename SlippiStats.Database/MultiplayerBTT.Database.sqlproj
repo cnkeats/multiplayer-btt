@@ -59,14 +59,11 @@
     <Folder Include="Schema\Player" />
     <Folder Include="Security\" />
     <Folder Include="Schema\PlayerProfile" />
-    <Folder Include="Schema\ReplayFile" />
     <Folder Include="Schema\User" />
     <Folder Include="Schema\UserRole" />
     <Folder Include="Schema\UserSession" />
     <Folder Include="Schema\Role" />
     <Folder Include="Schema\Entry" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
     <Folder Include="Schema\Character" />
     <Folder Include="Schema\Stage" />
   </ItemGroup>
@@ -82,18 +79,11 @@
     <Build Include="Schema\Player\Player_GetByPlayerName.sql" />
     <Build Include="Schema\Player\Player_GetList.sql" />
     <Build Include="Schema\Player\Player_GetById.sql" />
-    <Build Include="Schema\Player\Player_GetPlayedCharactersByPlayerId.sql" />
     <Build Include="Schema\Player\Player_GetListByFilters.sql" />
     <Build Include="Security\db_executor.sql" />
-    <Build Include="Schema\PlayerProfile\PlayerProfile_GetByPlayerId.sql" />
-    <Build Include="Schema\ReplayFile\ReplayFile.sql" />
-    <Build Include="Schema\ReplayFile\ReplayFile_Insert.sql" />
-    <Build Include="Schema\ReplayFile\ReplayFile_Update.sql" />
-    <Build Include="Schema\ReplayFile\ReplayFile_GetByGameIdSubmitter.sql" />
     <Build Include="Schema\Player\Player_GetGamesPlayedByPlayerId.sql" />
     <Build Include="Schema\Player\Player_GetGamesWonByPlayerId.sql" />
     <Build Include="Schema\Player\Player_GetCharacterMainsByPlayerId.sql" />
-    <Build Include="Schema\ReplayFile\ReplayFile_GetByGameId.sql" />
     <Build Include="Schema\User\User.sql" />
     <Build Include="Schema\User\User_GetById.sql" />
     <Build Include="Schema\User\User_GetByUserName.sql" />
@@ -116,8 +106,8 @@
     <Build Include="Schema\Entry\Entry.sql" />
     <Build Include="Schema\Character\Character.sql" />
     <Build Include="Schema\Stage\Stage.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="MultiplayerBTT.Database.refactorlog" />
+    <Build Include="Schema\Entry\Entry_GetById.sql" />
+    <Build Include="Schema\Entry\Entry_GetList.sql" />
+    <Build Include="Schema\Entry\Entry_Insert.sql" />
   </ItemGroup>
 </Project>

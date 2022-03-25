@@ -16,9 +16,11 @@ SELECT
 	COUNT(*) AS GamesPlayed
 FROM
 	Player WITH (NOLOCK)
-	INNER JOIN Game WITH (NOLOCK)
-		ON Game.Player1Id = Player.Id
-		OR Game.Player2Id = Player.Id
+	INNER JOIN Entry WITH (NOLOCK)
+		ON Entry.Player1Id = Player.Id
+		OR Entry.Player2Id = Player.Id
+		OR Entry.Player3Id = Player.Id
+		OR Entry.Player4Id = Player.Id
 WHERE
 	@playerFilter IS NULL
 	OR (Name LIKE @playerFilter)

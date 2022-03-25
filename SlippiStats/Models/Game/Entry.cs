@@ -46,6 +46,10 @@ namespace SlippiStats.Models
 
         public DateTime? Deleted { get; set; }
 
+        public Player Player1 { get; set; }
+
+        public Player Player2 { get; set; }
+
         public bool IsDeleted
         {
             get => Deleted != null;
@@ -78,6 +82,9 @@ namespace SlippiStats.Models
             Created = dataReader.GetValue<DateTime>(nameof(Created));
             Updated = dataReader.GetValue<DateTime?>(nameof(Updated));
             Deleted = dataReader.GetValue<DateTime?>(nameof(Deleted));
+
+            Player1 = new Player(dataReader, "p1");
+            Player2 = new Player(dataReader, "p2");
         }
 
         public static Entry GetById(IDbConnection connection, int id)
@@ -98,31 +105,12 @@ namespace SlippiStats.Models
             return user;
         }
 
-        public static Entry GetByHash(IDbConnection connection, string hash)
-        {
-            Entry user = null;
-
-            using IDbCommand command = connection.CreateStoredProcedure(
-                $"{nameof(Entry)}_{nameof(GetByHash)}",
-                new { hash });
-
-            using IDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                user = new Entry(reader);
-            }
-
-            return user;
-        }
-
         public static List<Entry> GetList(IDbConnection connection, bool includeAnonymous = false)
         {
             List<Entry> entries = new List<Entry>();
 
             using IDbCommand command = connection.CreateStoredProcedure(
-                $"{nameof(Entry)}_{nameof(GetList)}",
-                new { includeAnonymous });
+                $"{nameof(Entry)}_{nameof(GetList)}");
 
             using IDataReader reader = command.ExecuteReader();
 

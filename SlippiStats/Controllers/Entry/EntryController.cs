@@ -18,8 +18,7 @@ namespace SlippiStats.Controllers
         {
             EntryListViewModel viewModel = new EntryListViewModel();
 
-            //viewModel.Entries = Game.GetList(Database.Connection);
-            viewModel.Entries = new List<Entry>();
+            viewModel.Entries = Entry.GetList(Database.Connection);
 
             return View(viewModel);
         }
@@ -28,7 +27,7 @@ namespace SlippiStats.Controllers
         public IActionResult List(EntryListViewModel viewModel)
         {
             //viewModel.Entries = Game.GetListByFilters(Database.Connection, viewModel.PlayerFilter1, viewModel.PlayerFilter2, viewModel.CharacterFilter1, viewModel.CharacterFilter2, viewModel.StageFilter);
-            viewModel.Entries = new List<Entry>();
+            viewModel.Entries = Entry.GetList(Database.Connection);
 
             return View(viewModel);
         }
@@ -47,10 +46,51 @@ namespace SlippiStats.Controllers
             return View(viewModel);
         }
 
-        [AllowAnonymous]
-        public IActionResult Upload()
+        public IActionResult Submit()
         {
-            EntryUploadViewModel viewModel = new EntryUploadViewModel();
+            EntrySubmitViewModel viewModel = new EntrySubmitViewModel();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Submit(EntrySubmitViewModel viewModel)
+        {
+            Player player1 = Player.GetByPlayerName(Database.Connection, viewModel.Player1.Trim());
+
+            if (player1 == null)
+            {
+                player1 = new Player();
+                player1.Name = viewModel.Player1.Trim();
+                player1.Save(Database.Connection);
+            }
+
+            Player player2 = null;
+            if (viewModel.Player2.Trim().Length > 0)
+            {
+
+                player2 = Player.GetByPlayerName(Database.Connection, viewModel.Player2.Trim());
+
+                if (player2 == null)
+                {
+                    player2 = new Player();
+                    player2.Name = viewModel.Player2.Trim();
+                    player2.Save(Database.Connection);
+                }
+            }
+
+            Entry entry = new Entry();
+            entry.Character1 = viewModel.Character1;
+            entry.Character2 = viewModel.Character2;
+            entry.Player1Id = player1.Id;
+            entry.Player2Id = player2.Id;
+            entry.Stage = viewModel.Stage;
+            entry.Frames = viewModel.Frames;
+            entry.TargetsRemaining = viewModel.TargetsRemaining;
+            entry.DateRun = viewModel.DateRun;
+            entry.Platform = viewModel.Platform;
+            entry.VideoURL = viewModel.VideoURL;
+            entry.Save(Database.Connection);
 
             return View(viewModel);
         }
