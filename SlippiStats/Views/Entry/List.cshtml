@@ -81,8 +81,8 @@
         @foreach (Entry entry in Model.Entries)
         {
             <tr class="align-center">
-                <td><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
-                <td><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
+                <td onclick="goToCharacter(@((int)entry.Character1))"><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
+                <td onclick="goToCharacter(@((int)entry.Character2))"><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
                 <td>@entry.Stage.GetDisplayName()</td>
                 <td>@entry.Frames</td>
                 <td>@entry.DateRun.ToShortDateString()</td>
@@ -99,6 +99,10 @@
 
         function goToGame(id) {
             window.location.href = '/Game/' + id
+        }
+
+        function goToCharacter(id) {
+            window.location.href = '/Character/' + id;
         }
     </script>
 }

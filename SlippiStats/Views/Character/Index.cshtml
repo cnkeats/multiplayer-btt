@@ -1,0 +1,66 @@
+﻿@model CharacterIndexViewModel
+
+@{
+    ViewData["Title"] = "Player List Page";
+}
+
+<div class="section-filters">
+    <h3>Stats Overview - </h3>
+    <form class="form-standard" method="post" id="filterForm">
+        <input id="opponentFilter" name="opponentFilter" placeholder="Opponent Tag or Code" value=" />
+        <input id="characterFilter" name="character" hidden />
+        <input id="opponentCharacterFilter" name="opponentCharacter" hidden />
+        <button class="button" type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="profile-overview">
+    <div class="profile-matchups">
+        <table class="table-matchups">
+            <thead>
+                <tr>
+                    <th onclick="clearFilter()" onmouseover="hoverTable()" onmouseout="unhoverTable()" />
+                    <th onclick="clearFilter()" onmouseover="hoverTable()" onmouseout="unhoverTable()" />
+                    @{int i = 3;}
+                    @foreach (Character character in Model.Characters)
+                    {
+                        if (character.GetTournamentLegality())
+                        {
+                            <th><img src="@character.GetStockIconPath()" /></th>
+                        }
+                        i++;
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{int row = 1;}
+                @foreach (Character character in Model.Characters)
+                {
+                    if (character.GetTournamentLegality())
+                    {
+                        <tr class="matchup-row ">
+                            <td class="matchup-row-header" style="min-width: 27px;"></td>
+                            <td class="matchup-row-header"><img src="@character.GetStockIconPath()" /></td>
+                            @{int col = 3;}
+                            @foreach (Character opponentCharacter in Model.Characters)
+                            {
+                                if (opponentCharacter.GetTournamentLegality())
+                                {
+                                    <td class="matchup-cell" id="@(character)-@(opponentCharacter)"></td>
+                                }
+                            col++;
+                            }
+                        </tr>
+                    }
+                row++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+    </script>
+}

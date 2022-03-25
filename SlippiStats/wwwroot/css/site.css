@@ -804,13 +804,12 @@ div[class^="section-"] {
     background-color: var(--color-matchup-table);
 }
 
-.matchup-cell-colored-sticky,
-.matchup-cell-colored {
+.table-matchups tbody tr:hover {
     background-color: var(--color-secondary-dark) !important;
     outline:1px solid var(--color-tertiary);
     outline-offset:-2px;
     cursor:pointer;
-    transition-duration:.15s;
+    transition-duration:.01s;
     transition-property:outline, background-color;
     transition-timing-function:ease-in-out;
 }
