@@ -158,6 +158,24 @@ namespace SlippiStats.Models
             return entries;
         }
 
+        public static List<Entry> GetHighscoresByStage(IDbConnection connection, int stageId)
+        {
+            List<Entry> entries = new List<Entry>();
+
+            using IDbCommand command = connection.CreateStoredProcedure(
+                $"{nameof(Entry)}_{nameof(GetHighscoresByStage)}",
+                new { stageId });
+
+            using IDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                entries.Add(new Entry(reader));
+            }
+
+            return entries;
+        }
+
         public void Save(IDbConnection connection)
         {
             if (Id == 0)

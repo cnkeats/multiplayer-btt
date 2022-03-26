@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlippiStats.GameDataEnums;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
@@ -22,8 +23,6 @@ namespace SlippiStats.Extensions
         }
         public static string GetStockIconPath(this Enum @enum)
         {
-            Type enumType = @enum.GetType();
-
             var attribute = GetAttribute<StockIconAttribute>(@enum);
 
             return attribute?.StockIcon;
@@ -31,8 +30,6 @@ namespace SlippiStats.Extensions
 
         public static string GetStageIconPath(this Enum @enum)
         {
-            Type enumType = @enum.GetType();
-
             var attribute = GetAttribute<StageIconAttribute>(@enum);
 
             return attribute?.StageIcon;
@@ -40,8 +37,6 @@ namespace SlippiStats.Extensions
 
         public static string GetStageImagePath(this Enum @enum)
         {
-            Type enumType = @enum.GetType();
-
             var attribute = GetAttribute<StageImageAttribute>(@enum);
 
             return attribute?.StageImage;
@@ -49,8 +44,6 @@ namespace SlippiStats.Extensions
 
         public static int GetTierPlacement(this Enum @enum)
         {
-            Type enumType = @enum.GetType();
-
             var attribute = GetAttribute<TierPlacementAttribute>(@enum);
 
             return attribute?.TierPlacement ?? 999;
@@ -58,8 +51,6 @@ namespace SlippiStats.Extensions
 
         public static bool GetTournamentLegality(this Enum @enum)
         {
-            Type enumType = @enum.GetType();
-
             var attribute = GetAttribute<TournamentLegalAttribute>(@enum);
 
             if (attribute == null)
@@ -69,6 +60,43 @@ namespace SlippiStats.Extensions
 
             return attribute.TournamentLegal;
         }
+
+        public static int GetBTTStage(this Enum @enum)
+        {
+            var attribute = GetAttribute<BTTStageAttribute>(@enum);
+
+            if (attribute == null)
+            {
+                return -1;
+            }
+
+            return attribute.BTTStageId;
+        }
+
+        public static int GetCSSIndex(this Enum @enum)
+        {
+            var attribute = GetAttribute<CSSIndexAttribute>(@enum);
+
+            if (attribute == null)
+            {
+                return -1;
+            }
+
+            return attribute.CSSIndex;
+        }
+
+        public static Character GetStageCharacterAttribute(this Enum @enum)
+        {
+            var attribute = GetAttribute<StageCharacterAttribute>(@enum);
+
+            if (attribute == null)
+            {
+                return Character.SANDBAG;
+            }
+
+            return attribute.Character;
+        }
+        
 
         private static DisplayAttribute GetDisplayAttribute(object value)
         {
@@ -145,6 +173,36 @@ namespace SlippiStats.Extensions
         public TierPlacementAttribute(int index)
         {
             this.TierPlacement = index;
+        }
+    }
+
+    class BTTStageAttribute : Attribute
+    {
+        public int BTTStageId { get; private set; }
+
+        public BTTStageAttribute(int index)
+        {
+            this.BTTStageId = index;
+        }
+    }
+
+    class CSSIndexAttribute : Attribute
+    {
+        public int CSSIndex { get; private set; }
+
+        public CSSIndexAttribute(int index)
+        {
+            this.CSSIndex = index;
+        }
+    }
+
+    class StageCharacterAttribute : Attribute
+    {
+        public Character Character { get; private set; }
+
+        public StageCharacterAttribute(Character character)
+        {
+            this.Character = character;
         }
     }
 }

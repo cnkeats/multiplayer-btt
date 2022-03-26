@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SlippiStats.Configuration;
 using SlippiStats.Controllers;
+using SlippiStats.Extensions;
+using SlippiStats.GameDataEnums;
+using SlippiStats.Models;
 
-namespace MultiplayerBTT.Controllers.Character
+namespace MultiplayerBTT.Controllers
 {
     public class CharacterController : ApplicationController
     {
@@ -25,12 +28,8 @@ namespace MultiplayerBTT.Controllers.Character
         public IActionResult Index(int id)
         {
             CharacterIndexViewModel viewModel = new CharacterIndexViewModel();
-            //viewModel.Entry = Entry.GetById(Database.Connection, id);
-
-            /*if (viewModel.Entry == null)
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }*/
+            viewModel.Character = (Character)id;
+            viewModel.Entries = Entry.GetHighscoresByStage(Database.Connection, viewModel.Character.GetBTTStage());
 
             return View(viewModel);
         }

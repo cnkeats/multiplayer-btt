@@ -141,56 +141,82 @@ namespace SlippiStats.GameDataEnums
         [Display(Name = "Final Destination")]
         FINAL_DESTINATION = 32,
         [Display(Name = "Mario BTT")]
+        [StageCharacter(Character.MARIO)]
         TARGET_TEST_MARIO = 33,
         [Display(Name = "Captain Falcon BTT")]
+        [StageCharacter(Character.CAPTAIN_FALCON)]
         TARGET_TEST_CAPTAIN_FALCON = 34,
         [Display(Name = "Young Link BTT")]
+        [StageCharacter(Character.YOUNG_LINK)]
         TARGET_TEST_YOUNG_LINK = 35,
         [Display(Name = "Donkey Kong BTT")]
+        [StageCharacter(Character.DONKEY_KONG)]
         TARGET_TEST_DONKEY_KONG = 36,
         [Display(Name = "Dr. Mario BTT")]
+        [StageCharacter(Character.DR_MARIO)]
         TARGET_TEST_DOCTOR_MARIO = 37,
         [Display(Name = "Falco BTT")]
+        [StageCharacter(Character.FALCO)]
         TARGET_TEST_FALCO = 38,
         [Display(Name = "Fox BTT")]
+        [StageCharacter(Character.FOX)]
         TARGET_TEST_FOX = 39,
         [Display(Name = "Ice Climbers BTT")]
+        [StageCharacter(Character.ICE_CLIMBERS)]
         TARGET_TEST_ICE_CLIMBERS = 40,
         [Display(Name = "Kirby BTT")]
+        [StageCharacter(Character.KIRBY)]
         TARGET_TEST_KIRBY = 41,
         [Display(Name = "Bowser BTT")]
+        [StageCharacter(Character.BOWSER)]
         TARGET_TEST_BOWSER = 42,
         [Display(Name = "Link BTT")]
+        [StageCharacter(Character.LINK)]
         TARGET_TEST_LINK = 43,
         [Display(Name = "Luigi BTT")]
+        [StageCharacter(Character.LUIGI)]
         TARGET_TEST_LUIGI = 44,
         [Display(Name = "Marth BTT")]
+        [StageCharacter(Character.MARTH)]
         TARGET_TEST_MARTH = 45,
         [Display(Name = "Mewtwo BTT")]
+        [StageCharacter(Character.MEWTWO)]
         TARGET_TEST_MEWTWO = 46,
         [Display(Name = "Ness BTT")]
+        [StageCharacter(Character.NESS)]
         TARGET_TEST_NESS = 47,
         [Display(Name = "Peach BTT")]
+        [StageCharacter(Character.PEACH)]
         TARGET_TEST_PEACH = 48,
         [Display(Name = "Pichu BTT")]
+        [StageCharacter(Character.PICHU)]
         TARGET_TEST_PICHU = 49,
         [Display(Name = "Pikachu BTT")]
+        [StageCharacter(Character.PIKACHU)]
         TARGET_TEST_PIKACHU = 50,
         [Display(Name = "Jigglypuff BTT")]
+        [StageCharacter(Character.JIGGLYPUFF)]
         TARGET_TEST_JIGGLYPUFF = 51,
         [Display(Name = "Samus BTT")]
+        [StageCharacter(Character.SAMUS)]
         TARGET_TEST_SAMUS = 52,
         [Display(Name = "Sheik BTT")]
+        [StageCharacter(Character.SHEIK)]
         TARGET_TEST_SHEIK = 53,
         [Display(Name = "Yoshi BTT")]
+        [StageCharacter(Character.YOSHI)]
         TARGET_TEST_YOSHI = 54,
         [Display(Name = "Zelda BTT")]
+        [StageCharacter(Character.ZELDA)]
         TARGET_TEST_ZELDA = 55,
         [Display(Name = "Mr. Game & Watch BTT")]
+        [StageCharacter(Character.MR_GAME_AND_WATCH)]
         TARGET_TEST_MR_GAME_AND_WATCH = 56,
         [Display(Name = "Roy BTT")]
+        [StageCharacter(Character.ROY)]
         TARGET_TEST_ROY = 57,
         [Display(Name = "Ganondorf BTT")]
+        [StageCharacter(Character.GANONDORF)]
         TARGET_TEST_GANONDORF = 58,
         
     }

@@ -1,0 +1,41 @@
+﻿@model CharacterListViewModel
+
+@{
+    ViewData["Title"] = "Stage List";
+}
+
+<div class="section-filters">
+    <h3>Stage List</h3>
+    <form class="form-standard" method="post" id="filterForm">
+        <input id="opponentFilter" name="opponentFilter" placeholder="Opponent Tag or Code" value="  />
+        <input id="characterFilter" name="character" hidden />
+        <input id="opponentCharacterFilter" name="opponentCharacter" hidden />
+        <button class="button" type="submit">Filter</button>
+    </form>
+</div>
+
+<table class="table-game-entry table-primary table-entries pad-top-lg">
+    <thead>
+        <tr>
+            <th class="align-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Character character in Model.Characters.Where(c => c.GetTournamentLegality()).OrderBy(c => c.GetCSSIndex()))
+        {
+            <tr class="align-center">
+                <td onclick="goToCharacter(@((int)character))" style="cursor:pointer"><img class="stock-icon" src="@character.GetStockIconPath()" /> @character.GetDisplayName()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+
+        function goToCharacter(id) {
+            window.location.href = '/Character/' + id;
+        }
+
+    </script>
+}

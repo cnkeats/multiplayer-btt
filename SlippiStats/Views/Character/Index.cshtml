@@ -1,11 +1,11 @@
 ﻿@model CharacterIndexViewModel
 
 @{
-    ViewData["Title"] = "Player List Page";
+    ViewData["Title"] = @Model.Character.GetDisplayName() + "'s Stage";
 }
 
 <div class="section-filters">
-    <h3>Stats Overview - </h3>
+    <h3>@Model.Character.GetDisplayName()'s Stage Overview</h3>
     <form class="form-standard" method="post" id="filterForm">
         <input id="opponentFilter" name="opponentFilter" placeholder="Opponent Tag or Code" value=" />
         <input id="characterFilter" name="character" hidden />
@@ -22,7 +22,7 @@
                     <th onclick="clearFilter()" onmouseover="hoverTable()" onmouseout="unhoverTable()" />
                     <th onclick="clearFilter()" onmouseover="hoverTable()" onmouseout="unhoverTable()" />
                     @{int i = 3;}
-                    @foreach (Character character in Model.Characters)
+                    @foreach (Character character in Model.Characters.OrderBy(c => c.GetCSSIndex()))
                     {
                         if (character.GetTournamentLegality())
                         {
@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 @{int row = 1;}
-                @foreach (Character character in Model.Characters)
+                @foreach (Character character in Model.Characters.OrderBy(c => c.GetCSSIndex()))
                 {
                     if (character.GetTournamentLegality())
                     {
@@ -42,11 +42,15 @@
                             <td class="matchup-row-header" style="min-width: 27px;"></td>
                             <td class="matchup-row-header"><img src="@character.GetStockIconPath()" /></td>
                             @{int col = 3;}
-                            @foreach (Character opponentCharacter in Model.Characters)
+                            @foreach (Character opponentCharacter in Model.Characters.OrderBy(c => c.GetCSSIndex()))
                             {
                                 if (opponentCharacter.GetTournamentLegality())
                                 {
-                                    <td class="matchup-cell" id="@(character)-@(opponentCharacter)"></td>
+                                    <td class="matchup-cell" id="@(character)-@(opponentCharacter)">
+                                        @(Model.FramesToTime(
+                                            Model.Entries.Where(e => e.Character1 == character && e.Character2 == opponentCharacter).FirstOrDefault()?.Frames
+                                        ) ?? "-")
+                                    </td>
                                 }
                             col++;
                             }
@@ -61,6 +65,21 @@
 
 @section Scripts {
     <script>
+
+        function framesToTime(frames, id) {
+
+            var minutes = Math.floor(frames / 60 / 60);
+            var seconds = Math.floor(frames / 60).toLocaleString('en-us', { minimumIntegerDigits: 2 });
+            var centiseconds = Math.floor((frames % 60) * 99 / 59).toLocaleString('en-us', { minimumIntegerDigits: 2 });
+            var time = `${minutes}:${seconds}.${centiseconds}`;
+            $(`#entry-${id}`).text(time);
+
+        }
+
+        @foreach (Entry entry in Model.Entries)
+        {
+            <text>framesToTime(@entry.Frames, @entry.Id);</text>
+        }
 
     </script>
 }

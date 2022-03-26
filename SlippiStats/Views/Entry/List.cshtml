@@ -83,8 +83,8 @@
             <tr class="align-center">
                 <td onclick="goToCharacter(@((int)entry.Character1))" style="cursor:pointer"><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
                 <td onclick="goToCharacter(@((int)entry.Character2))" style="cursor:pointer"><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
-                <td>@entry.Stage.GetDisplayName()</td>
-                <td>@entry.Frames</td>
+                <td  onclick="goToCharacter(@((int)entry.Stage.GetStageCharacterAttribute()))" style="cursor:pointer"><img class="stock-icon" src="@entry.Stage.GetStageCharacterAttribute().GetStockIconPath()" />@entry.Stage.GetStageCharacterAttribute().GetDisplayName()</td>
+                <td id="entry-@entry.Id">@entry.Frames</td>
                 <td>@entry.DateRun.ToShortDateString()</td>
             </tr>
         }
@@ -104,5 +104,21 @@
         function goToCharacter(id) {
             window.location.href = '/Character/' + id;
         }
+
+        function framesToTime(frames, id) {
+
+            var minutes = Math.floor(frames / 60 / 60);
+            var seconds = Math.floor(frames / 60).toLocaleString('en-us', { minimumIntegerDigits: 2 });
+            var centiseconds = Math.floor((frames % 60) * 99 / 59).toLocaleString('en-us', { minimumIntegerDigits: 2 });
+            var time = `${minutes}:${seconds}.${centiseconds}`;
+            $(`#entry-${id}`).text(time);
+            
+        }
+
+        @foreach (Entry entry in Model.Entries)
+        {
+            <text>framesToTime(@entry.Frames, @entry.Id);</text>
+        }
+
     </script>
 }
