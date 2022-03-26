@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace SlippiStats.Controllers
 {
+    [AllowAnonymous]
     public class EntryController : ApplicationController
     {
         public EntryController(ApplicationSettings settings, ApplicationDatabase database) : base(settings, database)

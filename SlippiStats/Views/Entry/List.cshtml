@@ -6,7 +6,7 @@
 
 <div class="section-filters">
     <h3>Highscores Overview - @Model.Entries.Count records found</h3>
-    <form class="form-standard" method="post">
+    <!--<form class="form-standard" method="post">
         <div class="form-standard-field">
             <input name="PlayerFilter1" placeholder="Player Tag or Code" type="text" value="@Model.PlayerFilter1" />
         </div>
@@ -64,7 +64,7 @@
         <div class="form-standard-field">
             <button class="button" type="submit">Filter</button>
         </div>
-    </form>
+    </form>-->
 </div>
 
 <table class="table-game-entry table-primary table-entries pad-top-lg">
@@ -81,8 +81,8 @@
         @foreach (Entry entry in Model.Entries)
         {
             <tr class="align-center">
-                <td onclick="goToCharacter(@((int)entry.Character1))"><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
-                <td onclick="goToCharacter(@((int)entry.Character2))"><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
+                <td onclick="goToCharacter(@((int)entry.Character1))" style="cursor:pointer"><img class="stock-icon" src="@entry.Character1.GetStockIconPath()" /> @entry.Character1.GetDisplayName() @(entry.Player1 != null ? string.Format("({0})", entry.Player1.Name) : "")</td>
+                <td onclick="goToCharacter(@((int)entry.Character2))" style="cursor:pointer"><img class="stock-icon" src="@entry.Character2.GetStockIconPath()" /> @entry.Character2.GetDisplayName() @(entry.Player2 != null ? string.Format("({0})", entry.Player2.Name) : "")</td>
                 <td>@entry.Stage.GetDisplayName()</td>
                 <td>@entry.Frames</td>
                 <td>@entry.DateRun.ToShortDateString()</td>

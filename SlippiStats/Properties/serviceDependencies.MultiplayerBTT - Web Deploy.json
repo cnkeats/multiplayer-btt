@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/multiplayer-btt-server/databases/MultiplayerBTT-prod",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:ApplicationDatabase",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

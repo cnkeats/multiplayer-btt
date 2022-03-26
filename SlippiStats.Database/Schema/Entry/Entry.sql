@@ -1,9 +1,9 @@
 ﻿CREATE TABLE dbo.Entry (
 	Id INT IDENTITY (1, 1) NOT NULL,
 	Character1	INT NOT NULL FOREIGN KEY REFERENCES Character(Id),
-	Character2	INT NULL FOREIGN KEY REFERENCES Character(Id),
-	Character3	INT NULL FOREIGN KEY REFERENCES Character(Id),
-	Character4	INT NULL FOREIGN KEY REFERENCES Character(Id),
+	Character2	INT NULL,
+	Character3	INT NULL,
+	Character4	INT NULL,
 	Player1Id INT NOT NULL,
 	Player2Id INT NULL,
 	Player3Id INT NULL,
