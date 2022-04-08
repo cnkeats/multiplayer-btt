@@ -1,8 +1,11 @@
-﻿CREATE PROCEDURE Entry_GetList
+﻿CREATE PROCEDURE Entry_GetHighscore
+	@character1 INT,
+	@character2 INT,
+	@stage INT
 
 AS
 
-SELECT TOP 20
+SELECT TOP 1
 	Entry.Id,
 	Entry.Character1,
 	Entry.Character2,
@@ -42,5 +45,20 @@ FROM
 		ON p1.Id = Player1Id
 	LEFT JOIN Player p2 WITH (NOLOCK)
 		ON p2.Id = Player2Id
+WHERE
+	Stage = @stage
+	AND
+	(
+		(
+			Character1 = @character1
+			AND Character2 = @character2
+		)
+		OR
+		(
+			Character2 = @character1
+			AND Character1 = @character2
+		)
+	)
 ORDER BY
-	Entry.DateRun DESC
+	Frames ASC,
+	Entry.DateRun ASC

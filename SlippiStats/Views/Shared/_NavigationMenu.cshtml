@@ -2,13 +2,16 @@
     @if (User.Identity.IsAuthenticated)
     {
         <li>
-            <a asp-controller="Character" asp-action="List">Stages</a>
-        </li>
-        <li>
-            <a asp-controller="Entry" asp-action="List">Highscores</a>
+            <a asp-controller="Home" asp-action="Random">Randomize</a>
         </li>
         <li>
             <a asp-controller="Entry" asp-action="Submit">Submit</a>
+        </li>
+        <li>
+            <a asp-controller="Entry" asp-action="List">Recent Submissions</a>
+        </li>
+        <li>
+            <a asp-controller="Character" asp-action="List">Stages</a>
         </li>
     }
     else

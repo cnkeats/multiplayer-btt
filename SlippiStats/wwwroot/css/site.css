@@ -946,7 +946,27 @@ div[class^="section-"] {
 
 *:hover { 
     /*outline:1px #72dadd solid*/
-} 
+}
+
+.random-section {
+    text-align: center;
+    font-size: 36px;
+}
+
+.random-section * {
+    text-align: center;
+}
+
+.random-wr {
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+.random-video {
+    margin: 20px;
+}
+
+
 
 .upload-section {
     text-align:center;

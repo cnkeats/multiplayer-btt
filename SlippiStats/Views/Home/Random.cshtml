@@ -1,0 +1,62 @@
+﻿@model HomeRandomViewModel
+
+@{
+    ViewData["Title"] = "Random BTT Mismatch";
+}
+
+<div class="section-heading">
+    <h2 style="font-size: 86px">You should run...</h2>
+</div>
+<div class="random-section">
+    <div>
+        @Model.Character1.GetDisplayName() / @Model.Character2.GetDisplayName() on @Model.Stage.GetStageCharacterAttribute().GetDisplayName() <label style="font-size:20px; vertical-align:middle">(@(((int)Model.Stage).ToString("X")))</label>
+    </div>
+    <div class="random-wr">
+        @if (Model.Highscore != null)
+        {
+            <text>
+                <div class="random-wr">
+                    The current record is @Model.RecordTime by @Model.Highscore.Player1.Name and @Model.Highscore.Player2.Name
+                </div>
+                <div class="random-video">
+                    <iframe id="player" width="630" height="405" frameborder="0" src="">
+                    </iframe>
+                </div>
+            </text>
+            }
+            else
+            {
+                <text>
+                    There are no existing runs - it's a free World Record! <img style="vertical-align:middle; margin-left: 15px" src="https://cdn.discordapp.com/emojis/662438035446693900.webp?size=96&quality=lossless" />
+                </text>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        function getEmbed(URL) {
+
+            if (URL.trim() == '') {
+                return;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: `https://www.youtube.com/oembed?url=${URL}`
+            })
+            .done(function (data) {
+                const elem = $.parseHTML(data['html'])
+                const src = $(elem).attr('src');
+
+                console.log(src);
+                $("#player").attr('src', src);
+            });
+
+        }
+
+        getEmbed("@Model.Highscore?.VideoURL");
+
+    </script>
+}

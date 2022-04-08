@@ -110,5 +110,6 @@
     <Build Include="Schema\Entry\Entry_GetList.sql" />
     <Build Include="Schema\Entry\Entry_Insert.sql" />
     <Build Include="Schema\Entry\Entry_GetHighscoresByStage.sql" />
+    <Build Include="Schema\Entry\Entry_GetHighscore.sql" />
   </ItemGroup>
 </Project>

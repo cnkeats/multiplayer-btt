@@ -46,17 +46,16 @@
                             {
                                 if (opponentCharacter.GetTournamentLegality())
                                 {
-                                    <td class="matchup-cell" id="@(character)-@(opponentCharacter)">
-                                        @(Model.FramesToTime(
-                                            Model.Entries.Where(e => e.Character1 == character && e.Character2 == opponentCharacter).FirstOrDefault()?.Frames
-                                        ) ?? "-")
+                                    Entry entry = Model.Entries.Where(e => (e.Character1 == character && e.Character2 == opponentCharacter) || (e.Character1 == opponentCharacter && e.Character2 == character)).FirstOrDefault();
+                                    <td class="matchup-cell" id="@(character)-@(opponentCharacter)" onclick="openEntry('@entry?.VideoURL')">
+                                        @(Model.FramesToTime(entry?.Frames) ?? "-")
                                     </td>
                                 }
                             col++;
                             }
                         </tr>
                     }
-                row++;
+                    row++;
                 }
             </tbody>
         </table>
@@ -74,6 +73,10 @@
             var time = `${minutes}:${seconds}.${centiseconds}`;
             $(`#entry-${id}`).text(time);
 
+        }
+
+        function openEntry(url) {
+            window.open(url, '_blank').focus();
         }
 
         @foreach (Entry entry in Model.Entries)

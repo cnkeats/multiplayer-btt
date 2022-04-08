@@ -105,6 +105,24 @@ namespace SlippiStats.Models
             return user;
         }
 
+        public static Entry GetHighscore(IDbConnection connection, Character character1, Character character2, Stage stage)
+        {
+            Entry user = null;
+
+            using IDbCommand command = connection.CreateStoredProcedure(
+                $"{nameof(Entry)}_{nameof(GetHighscore)}",
+                new { character1, character2, stage });
+
+            using IDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                user = new Entry(reader);
+            }
+
+            return user;
+        }
+
         public static List<Entry> GetList(IDbConnection connection, bool includeAnonymous = false)
         {
             List<Entry> entries = new List<Entry>();
