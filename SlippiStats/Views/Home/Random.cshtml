@@ -9,7 +9,7 @@
 </div>
 <div class="random-section">
     <div>
-        @Model.Character1.GetDisplayName() / @Model.Character2.GetDisplayName() on @Model.Stage.GetStageCharacterAttribute().GetDisplayName() <label style="font-size:20px; vertical-align:middle">(@(((int)Model.Stage).ToString("X")))</label>
+        @Model.Character1.GetDisplayName() / @Model.Character2.GetDisplayName() on @Model.Stage.GetStageCharacterAttribute().GetDisplayName() <label id="copy" style="vertical-align:middle; font-size: 34px; padding:5px; cursor:pointer" onclick="copy()" onmousedown="down()">📋</label>
     </div>
     <div class="random-wr">
         @if (Model.Highscore != null)
@@ -56,7 +56,24 @@
 
         }
 
+        function copy() {
+
+            // Hardcode gecko code
+            // This is stupid lol
+            var code = `$Online Break the Targets [Krohnos]\n*WIP code for playing BTT via Slippi Netplay. Extremely experimental. v0.2\nC216E8A4 0000000D\n3E208048 82319D30\n5631443E 2C110202\n41820044 3E208048\n82319D30 5631443E\n2C11010E 41820030\n8A2DAFA0 2C110000\n4182002C 2C110001\n41820024 3CE08048\n80E79D30 54E7443E\n2C070208 41820008\n4800000C 3D808016\n618C5290 280C0000\n60000000 00000000\nC216E750 00000010\n3E208048 82319D30\n5631443E 2C110202\n41820044 3E208048\n82319D30 5631443E\n2C11010E 41820030\n8A2DAFA0 2C110000\n41820044 2C110001\n4182003C 3CE08048\n80E79D30 54E7443E\n2C070208 41820008\n48000024 3E808048\n62940530 3A400033\n9A540000 3A40@(((int)Model.Stage).ToString("X").PadLeft(4, '0')) \n9A54000F 3A400000\n92540010 3C808017\n60000000 00000000\nC216E91C 00000012\n3CE08048 80E79D30\n54E7443E 2C070202\n41820040 2C07010E\n41820038 886DAFA0\n2C030000 41820060\n2C030001 41820058\n2C110003 41820050\n3CE08048 80E79D30\n54E7443E 2C070208\n41820008 48000038\n38600001 3C808045\n6084310E 98640000\n3C808045 60843F9E\n98640000 3C808045\n60844E2E 98640000\n3C808045 60845CBE\n98640000 80010024\n60000000 00000000`;
+
+            navigator.clipboard.writeText(code);
+            $("#copy").css('background-color', "");
+        }
+
+        function down() {
+            $("#copy").css('background-color', "grey");
+            $("#copy").css('border-radius', "10px");
+
+        }
+
         getEmbed("@Model.Highscore?.VideoURL");
+        $("#copy").mousedown(function (e) { e.preventDefault(); });
 
     </script>
 }
